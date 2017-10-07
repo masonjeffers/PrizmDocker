@@ -246,14 +246,13 @@ function license() {
 
 				echo "Licensing..."
 
-				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy write "$SOLUTION_NAME" "$OEM_KEY")" ]]; then
+				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy write "$SOLUTION_NAME" $OEM_KEY)" ]]; then
 					echo "Licensing failed."
+				else
+					echo "Licensing successful."
+					restart
+					break
 				fi
-
-				echo "Licensing successful."
-				restart
-
-				break
 				;;
 			"2")
 				read -rp "Solution name: " SOLUTION_NAME < /dev/tty
@@ -262,14 +261,13 @@ function license() {
 
 				echo "Licensing..."
 
-				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy get "$CONFIG_FILE" "$SOLUTION_NAME" "$ACCESS_KEY")" ]]; then
+				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy get "$CONFIG_FILE" "$SOLUTION_NAME" $ACCESS_KEY)" ]]; then
 					echo "Licensing failed."
+				else
+					echo "Licensing successful."
+					restart
+					break
 				fi
-
-				echo "Licensing successful."
-				restart
-
-				break
 				;;
 			"3")
 				clear
@@ -293,12 +291,11 @@ function license() {
 
 				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar eval get "$EMAIL")" ]]; then
 					echo "Licensing failed."
+				else
+					echo "Licensing successful."
+					restart
+					break
 				fi
-
-				echo "Licensing successful."
-				restart
-
-				break;
 				;;
 			"5")
 				echo "Terminating."
