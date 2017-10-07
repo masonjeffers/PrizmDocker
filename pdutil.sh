@@ -231,7 +231,6 @@ function download() {
 function license() {
 	if [[ -d "/usr/share/prizm" ]]; then
 		while true; do
-			echo ""
 			echo "  1.) I would like to license this system with an OEM LICENSE."
 			echo "  2.) I would like to license this system with a NODE-LOCKED LICENSE."
 			echo "  3.) I have a license but I do not know what type."
@@ -247,7 +246,7 @@ function license() {
 
 				echo "Licensing..."
 
-				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy write "$SOLUTION_NAME" "$OEM_KEY")" ]]; then
+				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy write "$SOLUTION_NAME" $OEM_KEY)" ]]; then
 					echo "/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy write \"$SOLUTION_NAME\" $OEM_KEY"
 					echo "Licensing failed."
 				else
@@ -263,7 +262,7 @@ function license() {
 
 				echo "Licensing..."
 
-				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy get "$CONFIG_FILE" "$SOLUTION_NAME" "$ACCESS_KEY")" ]]; then
+				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy get "$CONFIG_FILE" "$SOLUTION_NAME" $ACCESS_KEY)" ]]; then
 					echo "/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy get \"$CONFIG_FILE\" \"$SOLUTION_NAME\" $ACCESS_KEY"
 					echo "Licensing failed."
 				else
@@ -288,6 +287,8 @@ function license() {
 				echo ""
 				echo "  If you require additional assistance, please contact sales@accusoft.com."
 				echo ""
+				read -rp "Press enter to continue..."
+				echo ""
 				;;
 			"4")
 				read -rp "Email address: " EMAIL < /dev/tty
@@ -310,6 +311,7 @@ function license() {
 					echo "Terminating."
 					break
 				fi
+				echo ""
 			esac
 		done
 
