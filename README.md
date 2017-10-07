@@ -7,7 +7,7 @@
     ./build.sh
     ./run.sh
 
-## PDUtil Command Line Interface
+## PDUtil Command Line Reference
 
     PrizmDoc Utility v1.0
 
@@ -32,6 +32,26 @@
       --exclude-pas     Exclude PAS
       --exclude-server  Exclude PrizmDoc Server
 
-## Unattended PDUtil Installation Example
+### Install
 
     curl -s https://raw.githubusercontent.com/brianjenkins94/PrizmDocker/master/pdutil.sh | sudo bash -s install --include-php --include-jsp
+
+### Remove
+
+    curl -s https://raw.githubusercontent.com/brianjenkins94/PrizmDocker/master/pdutil.sh | sudo bash -s remove
+
+### Download
+
+    curl -s https://raw.githubusercontent.com/brianjenkins94/PrizmDocker/master/pdutil.sh | sudo bash -s download
+
+### License
+
+    curl -s https://raw.githubusercontent.com/brianjenkins94/PrizmDocker/master/pdutil.sh | sudo bash -s license
+
+### Clear Logs
+
+    curl -s https://raw.githubusercontent.com/brianjenkins94/PrizmDocker/master/pdutil.sh | sudo bash -s clearlogs
+
+### Restart
+
+    curl -s https://raw.githubusercontent.com/brianjenkins94/PrizmDocker/master/pdutil.sh | sudo bash -s restart

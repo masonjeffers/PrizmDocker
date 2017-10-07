@@ -250,6 +250,8 @@ function license() {
 				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy write "$SOLUTION_NAME" "$OEM_KEY")" ]]; then
 					echo "Licensing failed."
 				fi
+
+				break
 				;;
 			"2")
 				read -rp "Solution name: " SOLUTION_NAME < /dev/tty
@@ -261,6 +263,8 @@ function license() {
 				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy get "$CONFIG_FILE" "$SOLUTION_NAME" "$ACCESS_KEY")" ]]; then
 					echo "Licensing failed."
 				fi
+
+				break
 				;;
 			"3")
 				echo ""
@@ -284,14 +288,18 @@ function license() {
 				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar eval get "$EMAIL")" ]]; then
 					echo "Licensing failed."
 				fi
+
+				break;
 				;;
 			"5")
 				echo "Terminating."
+				break
 				;;
 			*)
 				read -rp "Token \`$TOKEN\` unrecognized. Continue? [y/N] " RESPONSE < /dev/tty
 				if [[ ! "$RESPONSE"  =~ ^([yY][eE][sS]|[yY])$ ]]; then
 					echo "Terminating."
+					break
 				fi
 			esac
 		done
