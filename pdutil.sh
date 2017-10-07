@@ -238,18 +238,20 @@ function license() {
 			echo "  5.) I do not want to license my product at this time."
 			echo ""
 
-			RESPONSE="1"
 			read -rp "Select an option (1-5) [1]: " RESPONSE < /dev/tty
 			case "$RESPONSE" in
-			"1")
+			"1"|"")
 				read -rp "Solution name: " SOLUTION_NAME < /dev/tty
 				read -rp "OEM key: " OEM_KEY < /dev/tty
 
 				echo "Licensing..."
-				echo ""
+
 				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy write "$SOLUTION_NAME" "$OEM_KEY")" ]]; then
 					echo "Licensing failed."
 				fi
+
+				echo "Licensing successful."
+				restart
 
 				break
 				;;
@@ -259,14 +261,18 @@ function license() {
 				read -rp "Access key: " ACCESS_KEY < /dev/tty
 
 				echo "Licensing..."
-				echo ""
+
 				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy get "$CONFIG_FILE" "$SOLUTION_NAME" "$ACCESS_KEY")" ]]; then
 					echo "Licensing failed."
 				fi
 
+				echo "Licensing successful."
+				restart
+
 				break
 				;;
 			"3")
+				clear
 				echo ""
 				echo "  You can find your license type by selecting the \"Licenses\" tab on the"
 				echo "Accusoft Portal: https://my.accusoft.com/"
@@ -289,6 +295,9 @@ function license() {
 					echo "Licensing failed."
 				fi
 
+				echo "Licensing successful."
+				restart
+
 				break;
 				;;
 			"5")
@@ -301,6 +310,7 @@ function license() {
 					echo "Terminating."
 					break
 				fi
+				echo ""
 			esac
 		done
 
