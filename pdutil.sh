@@ -247,7 +247,7 @@ function license() {
 
 				echo "Licensing..."
 				echo ""
-				if [[ ! "$(/usr/share/prizm/java/jre8/java -jar /usr/share/prizm/plu/plu.jar deploy write "$SOLUTION_NAME" "$OEM_KEY")" ]]; then
+				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy write "$SOLUTION_NAME" "$OEM_KEY")" ]]; then
 					echo "Licensing failed."
 				fi
 				;;
