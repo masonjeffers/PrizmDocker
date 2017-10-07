@@ -248,7 +248,7 @@ function license() {
 				echo "Licensing..."
 
 				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy write "$SOLUTION_NAME" "$OEM_KEY")" ]]; then
-					echo "/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy write \"$SOLUTION_NAME\" \"$OEM_KEY\")"
+					echo "/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy write \"$SOLUTION_NAME\" $OEM_KEY"
 					echo "Licensing failed."
 				else
 					echo "Licensing successful."
@@ -264,7 +264,7 @@ function license() {
 				echo "Licensing..."
 
 				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy get "$CONFIG_FILE" "$SOLUTION_NAME" "$ACCESS_KEY")" ]]; then
-					echo "/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy get "$CONFIG_FILE" "$SOLUTION_NAME" "$ACCESS_KEY""
+					echo "/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy get \"$CONFIG_FILE\" \"$SOLUTION_NAME\" $ACCESS_KEY"
 					echo "Licensing failed."
 				else
 					echo "Licensing successful."
