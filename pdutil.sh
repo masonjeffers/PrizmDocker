@@ -231,6 +231,7 @@ function download() {
 function license() {
 	if [[ -d "/usr/share/prizm" ]]; then
 		while true; do
+			echo ""
 			echo "  1.) I would like to license this system with an OEM LICENSE."
 			echo "  2.) I would like to license this system with a NODE-LOCKED LICENSE."
 			echo "  3.) I have a license but I do not know what type."
@@ -238,15 +239,16 @@ function license() {
 			echo "  5.) I do not want to license my product at this time."
 			echo ""
 
-			read -rp "Select an option (1-5) [1]: " RESPONSE < /dev/tty
+			read -rp "Select an option (1-5) [5]: " RESPONSE < /dev/tty
 			case "$RESPONSE" in
-			"1"|"")
+			"1")
 				read -rp "Solution name: " SOLUTION_NAME < /dev/tty
 				read -rp "OEM key: " OEM_KEY < /dev/tty
 
 				echo "Licensing..."
 
-				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy write "$SOLUTION_NAME" $OEM_KEY)" ]]; then
+				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy write "$SOLUTION_NAME" "$OEM_KEY")" ]]; then
+					echo "/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy write \"$SOLUTION_NAME\" \"$OEM_KEY\")"
 					echo "Licensing failed."
 				else
 					echo "Licensing successful."
@@ -261,7 +263,8 @@ function license() {
 
 				echo "Licensing..."
 
-				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy get "$CONFIG_FILE" "$SOLUTION_NAME" $ACCESS_KEY)" ]]; then
+				if [[ ! "$(/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy get "$CONFIG_FILE" "$SOLUTION_NAME" "$ACCESS_KEY")" ]]; then
+					echo "/usr/share/prizm/java/jre8/bin/java -jar /usr/share/prizm/plu/plu.jar deploy get "$CONFIG_FILE" "$SOLUTION_NAME" "$ACCESS_KEY""
 					echo "Licensing failed."
 				else
 					echo "Licensing successful."
@@ -302,12 +305,11 @@ function license() {
 				break
 				;;
 			*)
-				read -rp "Token \`$TOKEN\` unrecognized. Continue? [y/N] " RESPONSE < /dev/tty
+				read -rp "Token \`$RESPONSE\` unrecognized. Continue? [y/N] " RESPONSE < /dev/tty
 				if [[ ! "$RESPONSE"  =~ ^([yY][eE][sS]|[yY])$ ]]; then
 					echo "Terminating."
 					break
 				fi
-				echo ""
 			esac
 		done
 
