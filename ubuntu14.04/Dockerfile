@@ -1,4 +1,4 @@
-# PrizmDocker 14.04
+# PrizmDocker
 #
 # VERSION               1.0
 
