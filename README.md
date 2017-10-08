@@ -1,12 +1,5 @@
 # PrizmDocker
 
-## Quickstart
-
-    cd PrizmDocker-master
-    chmod 755 build.sh run.sh
-    ./build.sh
-    ./run.sh
-
 ## PDUtil Command Line Reference
 
     PrizmDoc Utility v1.0
