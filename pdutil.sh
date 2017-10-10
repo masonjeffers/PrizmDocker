@@ -79,7 +79,7 @@ function install_deb() {
 			apt-get install -y apache2
 
 			echo "Installing php5..."
-			apt-get install -y php5 libapache2-mod-php5
+			apt-get install -y php5 php5-curl libapache2-mod-php5
 
 			sed -i "176iAlias /pccis_sample /usr/share/prizm/Samples/php\n<Directory /usr/share/prizm/Samples/php>\n\tAllowOverride All\n\tRequire all granted\n</Directory>" /etc/apache2/apache2.conf
 		fi
@@ -94,6 +94,8 @@ function install_deb() {
 			echo "Deploying PCCSample.war..."
 			cp /usr/share/prizm/Samples/jsp/target/PCCSample.war /var/lib/tomcat7/webapps/
 		fi
+
+		chmod 755 /usr/share/prizm/Samples/Documents/*
 	fi
 }
 
@@ -141,7 +143,7 @@ function install_rpm() {
 			yum install -y httpd
 
 			echo "Installing php..."
-			yum install -y php
+			yum install -y php php5-curl
 
 			sed -i "\$aAlias /pccis_sample /usr/share/prizm/Samples/php\n<Directory /usr/share/prizm/Samples/php>\n\tAllowOverride All\n\tRequire all granted\n</Directory>" /etc/httpd/conf.d/php.conf
 
@@ -162,6 +164,8 @@ function install_rpm() {
 			echo "Registering tomcat with init.d..."
 			systemctl enable tomcat
 		fi
+
+		chmod 755 /usr/share/prizm/Samples/Documents/*
 	fi
 }
 
