@@ -79,7 +79,7 @@ function install_deb() {
 			apt-get install -y apache2
 
 			echo "Installing php5..."
-			apt-get install -y php5 php5-curl libapache2-mod-php5
+			apt-get install -y php5 php5-curl libapache2-mod-php5 php-xml
 
 			sed -i "176iAlias /pccis_sample /usr/share/prizm/Samples/php\n<Directory /usr/share/prizm/Samples/php>\n\tAllowOverride All\n\tRequire all granted\n</Directory>" /etc/apache2/apache2.conf
 		fi
