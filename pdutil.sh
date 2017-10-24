@@ -362,7 +362,7 @@ function restart() {
 	elif [[ $RPM_BASED == true ]]; then
 		if [[ -d "/etc/httpd/conf.d/" ]]; then
 			echo "Restarting apache2..."
-			systemctl restart apache2
+			systemctl restart httpd.service
 		fi
 
 		if [[ -d "/usr/share/tomcat/webapps/" ]]; then
