@@ -143,7 +143,7 @@ function install_rpm() {
 			yum install -y httpd
 
 			echo "Installing php..."
-			yum install -y php php5-curl
+			yum install -y php
 
 			sed -i "\$aAlias /pccis_sample /usr/share/prizm/Samples/php\n<Directory /usr/share/prizm/Samples/php>\n\tAllowOverride All\n\tRequire all granted\n</Directory>" /etc/httpd/conf.d/php.conf
 
@@ -390,7 +390,17 @@ function restart() {
 # ./pdutil.sh *
 function main() {
 	echo ""
-	echo "PrizmDoc Utility v1.0"
+	echo "               \\\\\\\\\\\\\\\\\\"
+	echo "                \\\\\\\\\\\\\\\\\\\\"
+	echo "                 \\\\\\\\\\\\\\\\\\\\\\"
+	echo "                   \\\\\\\\\\\\\\\\\\\\"
+	echo "               //    \\\\\\\\\\\\\\\\\\\\"
+	echo "             //////   \\\\\\\\\\\\\\\\\\\\\\      PrizmDoc Utility v1.0"
+	echo "          ////////      \\\\\\\\\\\\\\\\\\\\\\"
+	echo "        ///////           \\\\\\\\\\\\\\\\\\\\"
+	echo "      //////\\\\\\\\\\\\\\\\\\\\\\\\   \\\\\\\\\\\\\\\\"
+	echo "    ////  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\      \\\\\\\\\\"
+	echo "  ///              \\\\\\\\\\\\\\\\\\\\\\\\\\\\"
 	echo ""
 
 	DEB_BASED=false
