@@ -189,9 +189,9 @@ function remove() {
 
 		echo "Removing dependencies..."
 		if [[ $DEB_BASED == true ]]; then
-			apt-get -fy remove prizm-services.* &> /dev/null
+			apt-get -fy remove prizm-* &> /dev/null
 		elif [[ $RPM_BASED == true ]]; then
-			yum remove -y prizm-services.* &> /dev/null
+			yum remove -y prizm-* &> /dev/null
 		fi
 
 		echo "Removing remaining files..."
