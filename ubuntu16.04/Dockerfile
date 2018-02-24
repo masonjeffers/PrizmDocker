@@ -8,4 +8,4 @@ RUN apt-get update \
 	&& apt-get install -y curl \
 	&& curl -s https://raw.githubusercontent.com/brianjenkins94/PrizmDocker/master/pdutil.sh | bash -s install --headless --include-php --include-jsp
 
-EXPOSE 3000 8080 18681 18682
+EXPOSE 80 3000 8080 18001 18681 18682
