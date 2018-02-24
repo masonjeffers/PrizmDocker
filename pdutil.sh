@@ -93,7 +93,7 @@ function install_rpm() {
 
 	if [[ "$HEADLESS" == true ]]; then
 		echo "Installing headless support..."
-		yum install xorg-x11-server-Xvfb
+		yum install -y xorg-x11-server-Xvfb
 
 		Xvfb :20 >/dev/null 2>&1 &
 		export DISPLAY=:20
