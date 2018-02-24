@@ -6,6 +6,6 @@ FROM centos:7
 
 RUN yum update -y \
 	&& yum install -y curl which \
-	&& curl -s https://raw.githubusercontent.com/brianjenkins94/PrizmDocker/master/pdutil.sh | bash -s install --headless --include-php --include-jsp
+	&& curl -s https://raw.githubusercontent.com/brianjenkins94/PrizmDocker/master/pdutil.sh | bash -s install --headless
 
 EXPOSE 80 3000 8080 18001 18681 18682
