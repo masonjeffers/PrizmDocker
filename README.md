@@ -20,14 +20,12 @@
     Options:
       --headless        Install Xvfb for headless environments
       --multilingual    Install Asian fonts
-      --include-php     Include PHP Samples
-      --include-jsp     Include JSP Samples
       --exclude-pas     Exclude PAS
       --exclude-server  Exclude PrizmDoc Server
 
 ### Install
 
-    curl -s https://raw.githubusercontent.com/brianjenkins94/PrizmDocker/master/pdutil.sh | sudo bash -s install --include-php --include-jsp
+    curl -s https://raw.githubusercontent.com/brianjenkins94/PrizmDocker/master/pdutil.sh | sudo bash -s install
 
 ### Remove
 

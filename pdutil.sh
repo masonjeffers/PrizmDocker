@@ -74,27 +74,6 @@ function install_deb() {
 		ln -s /usr/share/prizm/pas/pm2/pas.sh /etc/init.d/pas
 		update-rc.d pas defaults
 
-		if [[ "$INCLUDE_PHP" == true ]]; then
-			echo "Installing apache2..."
-			apt-get install -y apache2
-
-			echo "Installing php5..."
-			apt-get install -y php5 php5-curl libapache2-mod-php5 php-xml
-
-			sed -i "176iAlias /pccis_sample /usr/share/prizm/Samples/php\n<Directory /usr/share/prizm/Samples/php>\n\tAllowOverride All\n\tRequire all granted\n</Directory>" /etc/apache2/apache2.conf
-		fi
-
-		if [[ "$INCLUDE_JSP" == true ]]; then
-			echo "Installing java..."
-			apt-get install -y default-jre
-
-			echo "Installing tomcat7..."
-			apt-get install -y tomcat7
-
-			echo "Deploying PCCSample.war..."
-			cp /usr/share/prizm/Samples/jsp/target/PCCSample.war /var/lib/tomcat7/webapps/
-		fi
-
 		chmod 755 /usr/share/prizm/Samples/Documents/*
 	fi
 }
@@ -137,33 +116,6 @@ function install_rpm() {
 		echo "Registering PAS with init.d..."
 		ln -s /usr/share/prizm/pas/pm2/pas.sh /etc/init.d/pas
 		chkconfig --add pas
-
-		if [[ "$INCLUDE_PHP" == true ]]; then
-			echo "Installing apache..."
-			yum install -y httpd
-
-			echo "Installing php..."
-			yum install -y php
-
-			sed -i "\$aAlias /pccis_sample /usr/share/prizm/Samples/php\n<Directory /usr/share/prizm/Samples/php>\n\tAllowOverride All\n\tRequire all granted\n</Directory>" /etc/httpd/conf.d/php.conf
-
-			echo "Registering apache with init.d..."
-			systemctl enable httpd.service
-		fi
-
-		if [[ "$INCLUDE_JSP" == true ]]; then
-			echo "Installing java..."
-			yum install -y java-1.7.0-openjdk
-
-			echo "Installing tomcat..."
-			yum install -y tomcat tomcat-webapps tomcat-admin-webapps
-
-			echo "Deploying PCCSample.war..."
-			cp /usr/share/prizm/Samples/jsp/target/PCCSample.war /usr/share/tomcat/webapps/
-
-			echo "Registering tomcat with init.d..."
-			systemctl enable tomcat
-		fi
 
 		chmod 755 /usr/share/prizm/Samples/Documents/*
 	fi
@@ -349,28 +301,6 @@ function clearlogs() {
 
 # ./pdutil.sh restart
 function restart() {
-	if [[ $DEB_BASED == true ]]; then
-		if [[ -d "/etc/apache2/" ]]; then
-			echo "Restarting apache2..."
-			service apache2 restart
-		fi
-
-		if [[ -d "/var/lib/tomcat7/webapps/" ]]; then
-			echo "Restarting tomcat7..."
-			service tomcat7 restart
-		fi
-	elif [[ $RPM_BASED == true ]]; then
-		if [[ -d "/etc/httpd/conf.d/" ]]; then
-			echo "Restarting apache2..."
-			systemctl restart httpd.service
-		fi
-
-		if [[ -d "/usr/share/tomcat/webapps/" ]]; then
-			echo "Restarting tomcat..."
-			systemctl restart tomcat
-		fi
-	fi
-
 	if [[ -f "/usr/share/prizm/scripts/pccis.sh" ]]; then
 		echo "Restarting PCCIS..."
 		/usr/share/prizm/scripts/pccis.sh restart
@@ -410,8 +340,6 @@ function main() {
 	HEADLESS=false
 	MULTILINGUAL=false
 
-	INCLUDE_PHP=false
-	INCLUDE_JSP=false
 	EXCLUDE_PAS=false
 	EXCLUDE_SERVER=false
 
@@ -450,12 +378,6 @@ function main() {
 				;;
 			"--multilingual")
 				MULTILINGUAL=true
-				;;
-			"--include-php")
-				INCLUDE_PHP=true
-				;;
-			"--include-jsp")
-				INCLUDE_JSP=true
 				;;
 			"--exclude-pas")
 				EXCLUDE_PAS=true
@@ -521,8 +443,6 @@ function main() {
 		echo "Options:"
 		echo "  --headless        Install Xvfb for headless environments"
 		echo "  --multilingual    Install Asian fonts"
-		echo "  --include-php     Include PHP Samples"
-		echo "  --include-jsp     Include JSP Samples"
 		echo "  --exclude-pas     Exclude PAS"
 		echo "  --exclude-server  Exclude PrizmDoc Server"
 		;;
