@@ -36,11 +36,11 @@ function install_deb() {
 
 	echo "Resolving dependencies..."
 	if [[ ! "$EXCLUDE_SERVER" == true ]]; then
-		dpkg --force-depends -i ./*server*/*.deb
+		dpkg --force-depends --recursive --install ./*server*/
 	fi
 
 	if [[ ! "$EXCLUDE_PAS" == true ]]; then
-		dpkg --force-depends -i ./*client*/*.deb
+		dpkg --force-depends --recursive --install ./*client*/
 	fi
 
 	echo "Installing PrizmDoc..."
