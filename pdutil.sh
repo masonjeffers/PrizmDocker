@@ -74,7 +74,7 @@ function install_deb() {
 		ln -s /usr/share/prizm/pas/pm2/pas.sh /etc/init.d/pas
 		update-rc.d pas defaults
 
-		chmod 755 /usr/share/prizm/Samples/Documents/*
+		chmod 755 /usr/share/prizm/Samples/Documents/
 	fi
 }
 
@@ -117,7 +117,7 @@ function install_rpm() {
 		ln -s /usr/share/prizm/pas/pm2/pas.sh /etc/init.d/pas
 		chkconfig --add pas
 
-		chmod 755 /usr/share/prizm/Samples/Documents/*
+		chmod 755 /usr/share/prizm/Samples/Documents/
 	fi
 }
 
