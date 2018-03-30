@@ -44,7 +44,7 @@ function install_deb() {
 	fi
 
 	echo "Installing PrizmDoc..."
-	if [[ ! "$(apt-get -fy install)" ]]; then
+	if [[ ! "$(apt-get install -fy)" ]]; then
 		echo "Installation failed. Terminating." && exit 1
 	fi
 
@@ -141,7 +141,7 @@ function remove() {
 
 		echo "Removing dependencies..."
 		if [[ $DEB_BASED == true ]]; then
-			apt-get -fy remove prizm-* &> /dev/null
+			apt-get remove -fy prizm-* &> /dev/null
 		elif [[ $RPM_BASED == true ]]; then
 			yum remove -y prizm-* &> /dev/null
 		fi
@@ -159,7 +159,7 @@ function remove() {
 function download() {
 	# Install curl for fresh Debian installations
 	if [[ $DEB_BASED == true ]]; then
-		apt-get install curl &> /dev/null
+		apt-get install -y curl &> /dev/null
 	fi
 
 	SOURCE="$(curl -s https://www.accusoft.com/products/prizmdoc/eval/)"
