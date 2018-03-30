@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker image build . -t "prizmdocker-ubuntu14.04"
+docker image build . --tag "prizmdocker-ubuntu14.04" --no-cache
