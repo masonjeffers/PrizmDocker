@@ -278,27 +278,6 @@ function license() {
 	fi
 }
 
-# ./pdutil.sh clearlogs
-function clearlogs() {
-	# Prompt for confirmation
-	read -rp "Clear logs? [y/N] " RESPONSE < /dev/tty
-	if [[ ! "$RESPONSE"  =~ ^([yY][eE][sS]|[yY])$ ]]; then
-		echo "Terminating." && exit 1
-	fi
-
-	echo "Stopping services..."
-	/usr/share/prizm/scripts/pccis.sh stop
-
-	echo "Removing logs..."
-	rm -rf /usr/share/prizm/logs/*
-	mkdir /usr/share/prizm/logs/pas
-
-	echo "Starting services..."
-	/usr/share/prizm/scripts/pccis.sh start
-
-	echo "Successfully removed."
-}
-
 # ./pdutil.sh restart
 function restart() {
 	if [[ -f "/usr/share/prizm/scripts/pccis.sh" ]]; then
@@ -420,15 +399,12 @@ function main() {
 	"license")
 		license
 		;;
-	"clearlogs")
-		clearlogs
-		;;
 	"restart")
 		restart
 		;;
 	*)
 		echo "Usage:"
-		echo "  ./pdutil.sh (install|remove|download|license|clearlogs|restart) [options]"
+		echo "  ./pdutil.sh (install|remove|download|license|restart) [options]"
 		echo ""
 		echo "Reduces common PrizmDoc maintenance tasks down to proper Linux one-liners."
 		echo ""
@@ -437,7 +413,6 @@ function main() {
 		echo "  remove - Removes prior PrizmDoc installation"
 		echo "  download - Downloads PrizmDoc"
 		echo "  license - Licenses PrizmDoc"
-		echo "  clearlogs - Clears PrizmDoc log files"
 		echo "  restart - Restarts PrizmDoc services"
 		echo ""
 		echo "Options:"
