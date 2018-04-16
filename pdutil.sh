@@ -25,6 +25,9 @@ function install() {
 		# License
 		#license
 
+		# WORKAROUND: Installation-critical logic is invoked by explicitly calling `pccis.sh start`
+		/usr/share/prizm/scripts/pccis.sh start
+
 		# Restart
 		restart
 	fi
